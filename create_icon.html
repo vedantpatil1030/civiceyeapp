@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CivicEye Icon Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        canvas { border: 2px solid #ddd; margin: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>CivicEye App Icon Generator</h1>
+    <canvas id="iconCanvas" width="512" height="512"></canvas>
+    <br>
+    <button onclick="generateIcon()">Generate CivicEye Icon</button>
+    <button onclick="downloadIcon()">Download Icon</button>
+    
+    <script>
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function generateIcon() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 512, 512);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+            gradient.addColorStop(0, '#007AFF');
+            gradient.addColorStop(1, '#005BBB');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // White circle background
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.beginPath();
+            ctx.arc(256, 256, 200, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Eye symbol
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.ellipse(256, 256, 120, 80, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Eye pupil
+            ctx.fillStyle = '#007AFF';
+            ctx.beginPath();
+            ctx.arc(256, 256, 50, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Inner pupil
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(266, 246, 15, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Text below
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CIVIC', 256, 400);
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText('EYE', 256, 430);
+        }
+        
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'civiceye-icon-512.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate icon on page load
+        generateIcon();
+    </script>
+</body>
+</html>
